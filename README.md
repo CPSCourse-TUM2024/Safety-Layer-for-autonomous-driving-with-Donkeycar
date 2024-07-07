@@ -55,14 +55,32 @@ It creates a 2D map with 0 and 1 values, with 0 representing empty space and 1 r
 The car's position is then mapped to this virtual by rounding.
 
 ### Updating virtual location
-We gather the position and heading from the odometer and then compute the car's x, y, and heading to keep these values updated. Then we map them to the virtual track
+We gather the position and heading from the odometer and then compute the car's x, y, and heading, using math formulas that can be found in the code base, to keep these values updated. Then, we map them to the virtual track to use in the actual use-case of the safety layer.
 ### Computing collision
 The objects on the virtual track and the car itself have computed collision circles, and if any of them collide, the recovery logic is called.
 
 ### Recovery
-The car proceeds to 
-## Connecting Donkey with Safety layer
+Once a collision is detected, the car proceeds with the recovery mode. This logic proceeds as follows :\
+Wait for a few seconds. 
+Reverse (If a collision is detected again, stop the reverse.)\
+Wait for a few more seconds.\
+Continue normal operations.\
+\
+This logic should keep the car safe from hitting any obstacles or lines and allow the model to retry a different approach on how to proceed.
+## Connecting Donkey with Safety Layer
+How did we actually connect these two things? We added a class in the DonkeyCar library for our use case. When loading the model, we chose our hacked class instead. In this class, we have the safety logic implemented by wrapping the original run function and adding our functionality next to it. We import the safety.py file with the class implementing the virtual track and call on its function as necessary to ensure the model does not do anything incorrectly. 
+
+On top of this, we have a tool that sends the visualisation of the virtual track and the car's location to the defined IP address on which this client should run for debugging purposes.
 ## Results
+As a result of all these actions, the car can drive on the track we tested on. When the model is insufficient for this task, the safety layer proceeds to save the car from these unwanted actions and recovers from them. 
+
+$$$$$$$$$$$$$$$$$$INSERT VIDEO
+
 ## Conclusion
 
 ## How to run
+Proceed to set the JetRacer as defined in the product documentation.
+Change up the following files:
+mycar/...
+...
+...
