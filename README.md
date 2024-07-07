@@ -11,12 +11,28 @@ As a base for our idea, we used our course Professor Amr Alanwar's collaborative
 Our project uses the following platform to develop and run our implementation.\
 https://www.waveshare.com/product/jetracer-ros-ai-kit.htm \
 It is a JetRacer ROS kit from waveshare.\
-Components: Raspberry Pi RP2040 Chip, 37-520 Metal Encoder Motor, 11 wire AB phase hall speed sensor, supports wheel odometry, IMU sensor MPU9250, Lidar RPLIDAR A1
+Components: Raspberry Pi RP2040 Chip, 37-520 Metal Encoder Motor, 11 wire AB phase hall speed sensor, supports wheel odometry, IMU sensor MPU9250, Lidar RPLIDAR A1\
 
 ## Donkey library
+The JetRacer uses a Python self-driving library release 4.4.0 https://github.com/autorope/donkeycar
+
 ### Setup
+To set up the JetRacer, we followed the provided guide https://www.waveshare.com/wiki/DonkeyCar_for_JetRacer_ROS_Tutorial_I:_Install_Jetson_Nano
+We have decided to decrease the maximum speed by changing the PWM_STEERING_THROTTLE config values to the following: \
+"THROTTLE_FORWARD_PWM": 397,            #pwm value for max forward throttle\
+"THROTTLE_STOPPED_PWM": 307,            #pwm value for no movement\
+"THROTTLE_REVERSE_PWM": 157,            #pwm value for max reverse throttle
+
+## Inputs and camera hack
+The camera position of this pack is not overlooking the track properly and the quality and the lens as well did not provide enough context on the position of the car. Therefore we have decided to mount the camera on the top of the kit right on the lidar. Due to the nature of our track, lidar was not able to capture certain obstacles on the track including lines and certain small boxes. Therefore using it as a mount did not hurt our implementation as we have already decided to exclude lidar data in our model and went with only camera and joystick inputs.
+
 ### Model Selection
+We have tested the wide selection of models provided by this library, including "linear", "latent", "rnn", "3d".
+The best for our track, with the focus on drivability and avoiding crossing lines and hitting boxes, is the RNN model.
+
 ### Model Training
+11k
+The library requires manual training data 
 ## Track
 ## Safety Layer
 ### Virtual Track
