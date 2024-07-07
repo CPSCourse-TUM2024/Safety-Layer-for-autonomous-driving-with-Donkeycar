@@ -18,16 +18,16 @@ Components: Raspberry Pi RP2040 Chip, 37-520 Metal Encoder Motor, 11 wire AB pha
 ## Track
 ![IMG_1552](https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/bec8a2b9-ad7f-4e95-89c8-e7ea17b8fb6f)
 
-
 ## Donkey library
 The JetRacer uses a Python self-driving library release 4.4.0 https://github.com/autorope/donkeycar
 
 ### Setup
 To set up the JetRacer, we followed the provided guide https://www.waveshare.com/wiki/DonkeyCar_for_JetRacer_ROS_Tutorial_I:_Install_Jetson_Nano
-We have decided to decrease the maximum speed by changing the PWM_STEERING_THROTTLE config values to the following: \
+We have decided to decrease the maximum speed by changing the PWM_STEERING_THROTTLE config file of "mycar" folder values to the following: \
 "THROTTLE_FORWARD_PWM": 397,            #pwm value for max forward throttle\
 "THROTTLE_STOPPED_PWM": 307,            #pwm value for no movement\
 "THROTTLE_REVERSE_PWM": 157,            #pwm value for max reverse throttle\
+\
 DEFAULT_MODEL_TYPE = '**safety_rnn**' # Donekycar RNN model with our safety layer implemented. Read further down for more details.
 
 ## Inputs and camera hack
@@ -46,7 +46,12 @@ The best for our track, with the focus on drivability and avoiding crossing line
 This model still blunders on our track, so we implemented the safety layer. Read further down for more details.
 
 ## Safety Layer
+As previously mentioned we have added a safety layer to the DonkeyCar library by adding a special class on the RNN model implementation.
+The layer ensures the car never hits any object on our track and does not cross any lines in case the model would lead it to.
+
 ### Virtual Track
+
+
 ### Updating virtual location
 ### Computing collision
 ### Recovery
