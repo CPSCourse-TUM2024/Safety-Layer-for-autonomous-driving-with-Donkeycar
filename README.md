@@ -50,11 +50,19 @@ As previously mentioned we have added a safety layer to the DonkeyCar library by
 The layer ensures the car never hits any object on our track and does not cross any lines in case the model would lead it to.
 
 ### Virtual Track
-
+The virtual track is created using the virtual_env_creator.py script. This output CSV must then be put inside the car folder in the JetRacer.
+It creates a 2D map with 0 and 1 values, with 0 representing empty space and 1 representing an obstacle. The accuracy of the map is 5mm in real world per pixel in the virtual track.
+The car's position is then mapped to this virtual by rounding.
 
 ### Updating virtual location
+We gather the position and heading from the odometer and then compute the car's x, y, and heading to keep these values updated. Then we map them to the virtual track
 ### Computing collision
+The objects on the virtual track and the car itself have computed collision circles, and if any of them collide, the recovery logic is called.
+
 ### Recovery
+The car proceeds to 
 ## Connecting Donkey with Safety layer
 ## Results
 ## Conclusion
+
+## How to run
