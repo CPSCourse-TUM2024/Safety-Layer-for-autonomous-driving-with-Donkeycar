@@ -1,5 +1,6 @@
 # Safety-Layer-for-autonomous-driving-with-Donkeycar
 This project was created for the Embedded Systems, Cyber-Physical Systems and Robotics course.\
+Created by Yigit Ilk, Roman Mishchuk, Liam Paul Brandt, Patrik Valach, Michał Chrzanowski, Paul Hagner.\
 This project aims to introduce a safety layer on top of a common reinforcement learning library.\
 We are using a Jetracer car, the purpose of which is to learn, develop, and test machine learning models for autonomous driving.\
 We developed an RNN model that performs the basic function of driving and turning with some basic collision detection.\
