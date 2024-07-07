@@ -1,11 +1,11 @@
 # Safety-Layer-for-autonomous-driving-with-Donkeycar
 This project was created for the Embedded Systems, Cyber-Physical Systems and Robotics course.\
 This project aims to introduce a safety layer on top of a common reinforcement learning library.\
-We are using a Jetracer car, whose purpose is to learn, develop and test machine learning models for autonomous driving.\
-We developed a RNN model that performs the basic function of driving and turning with some basic colision detection.\
-It has proven to be inadequate to secure complete safety of driving without hitting objects.\
+We are using a Jetracer car, the purpose of which is to learn, develop, and test machine learning models for autonomous driving.\
+We developed an RNN model that performs the basic function of driving and turning with some basic collision detection.\
+It has proven inadequate to secure the complete safety of driving without hitting objects.\
 Therefore, we have decided to develop a safety layer on top of the Donkeycar library to prevent collisions and recover from such situations.\
-As a base for our idea, we used our course professor Amr Alanwar's collaborative research project https://github.com/Mahmoud-Selim/Safe-Reinforcement-Learning-for-Black-Box-Systems-Using-Reachability-Analysis
+As a base for our idea, we used our course Professor Amr Alanwar's collaborative research project https://github.com/Mahmoud-Selim/Safe-Reinforcement-Learning-for-Black-Box-Systems-Using-Reachability-Analysis
 
 ## Hardware Platform
 Our project uses the following platform to develop and run our implementation.\
