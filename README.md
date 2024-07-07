@@ -1,4 +1,6 @@
-# Embedded-Systems-Cyber-Physical-Systems-and-Robotics-course-project
+# Safety-Layer-for-automonous-driving-with-Donkeycar
+This project was created for the Embedded Systems, Cyber-Physical Systems and Robotics course.
+
 Our project uses the following platform to develop and run our implementation.\
 https://www.waveshare.com/product/jetracer-ros-ai-kit.htm \
 It is a JetRacer ROS kit from waveshare.\
