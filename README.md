@@ -5,13 +5,18 @@ We are using a Jetracer car, the purpose of which is to learn, develop, and test
 We developed an RNN model that performs the basic function of driving and turning with some basic collision detection.\
 It has proven inadequate to secure the complete safety of driving without hitting objects.\
 Therefore, we have decided to develop a safety layer on top of the Donkeycar library to prevent collisions and recover from such situations.\
-As a base for our idea, we used our course Professor Amr Alanwar's collaborative research project https://github.com/Mahmoud-Selim/Safe-Reinforcement-Learning-for-Black-Box-Systems-Using-Reachability-Analysis
+As a base for our idea, we used our course Professor Amr Alanwar's collaborative research project https://github.com/Mahmoud-Selim/Safe-Reinforcement-Learning-for-Black-Box-Systems-Using-Reachability-Analysis \
+Paper used: https://doi.org/10.1109/LRA.2022.3192205
 
 ## Hardware Platform
 Our project uses the following platform to develop and run our implementation.\
 https://www.waveshare.com/product/jetracer-ros-ai-kit.htm \
 It is a JetRacer ROS kit from waveshare.\
 Components: Raspberry Pi RP2040 Chip, 37-520 Metal Encoder Motor, 11 wire AB phase hall speed sensor, supports wheel odometry, IMU sensor MPU9250, Lidar RPLIDAR A1\
+
+## Track
+![IMG_1552](https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/bec8a2b9-ad7f-4e95-89c8-e7ea17b8fb6f)
+
 
 ## Donkey library
 The JetRacer uses a Python self-driving library release 4.4.0 https://github.com/autorope/donkeycar
@@ -29,16 +34,18 @@ The camera position of this pack does not overlook the track properly, and the q
 ![IMG_1546](https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/db48ce28-c0c4-4ab1-9529-0c873f22c210)
 ![IMG_1547](https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/fcb4a543-4170-4cd3-8268-8f22f1a5d44e)
 
+### Model Training
+As discussed in the previous section, we use the camera and joystick input to train the model.
+We have acc
+11k
+The library requires manual training data 
 
 ### Model Selection
 We have tested the wide selection of models provided by this library, including "linear", "latent", "rnn", "3d".
-The best for our track, with the focus on drivability and avoiding crossing lines and hitting boxes, is the RNN model.
-This model still does blunders on our track 
+The best for our track, with the focus on drivability and avoiding crossing lines and hitting boxes, is the **RNN** model.
+This model still blunders on our track, so we implemented the safety layer. Read further down for more details.
 
-### Model Training
-11k
-The library requires manual training data 
-## Track
+
 ## Safety Layer
 ### Virtual Track
 ### Updating virtual location
