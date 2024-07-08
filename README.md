@@ -39,12 +39,12 @@ The camera position of this pack does not overlook the track properly, and the q
 ### Model Training
 As discussed in the previous section, we use the camera and joystick input to train the model.
 The library requires manual training data from us, driving it on track. We tried to drive it in as accurate a manner as possible with backing up if the car were to hit anything due to its low turning angle. 
-We have collected ~11k records to train the model. If there are any more records, the library trainer will take forever to train the model.
+We have collected ~11k records to train the model. If there are any more recorded, the library trainer will take too much time to train the model.
 
 ### Model Selection
 We have tested the wide selection of models provided by this library, including "linear", "latent", "**rnn**", "3d".
 The best for our track, with the focus on drivability and avoiding crossing lines and hitting boxes, is the **RNN** model.
-This model still blunders on our track, so we implemented the safety layer. Read further down for more details.
+This model still blunders on our track, so we implemented the safety layer.
 
 ## Safety Layer
 As previously mentioned we have added a safety layer to the DonkeyCar library by adding a special class on the RNN model implementation.
