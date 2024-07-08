@@ -77,6 +77,7 @@ This logic should keep the car safe from hitting any obstacles or lines and allo
 How did we actually connect these two things? We added a class in the DonkeyCar library for our use case. When loading the model, we chose our hacked in class instead. In this class, we have the safety logic implemented by wrapping the original run function and adding our functionality next to it. We import the safety.py file with the class implementing the virtual track and call on its function as necessary to ensure the model does not do anything incorrectly. 
 
 On top of this, we have a tool that sends the visualisation of the virtual track and the car's location to the defined IP address on which this client should run for debugging purposes. This connection is established using the class in common_state.py that is once again located in the "mycar" folder.
+$$$$$$$$$$$$$$$$$$insert image of the visualization
 
 ## Results
 As a result of all these actions, the car can drive on the track we tested on. When the model is insufficient for this task, the safety layer proceeds to save the car from these unwanted actions and recovers from them. 
