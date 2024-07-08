@@ -22,8 +22,9 @@ Components: Raspberry Pi RP2040 Chip, 37-520 Metal Encoder Motor, 11 wire AB pha
 The JetRacer uses a Python self-driving library release 4.4.0 https://github.com/autorope/donkeycar
 
 ### Setup
-To set up the JetRacer, we followed the provided guide https://www.waveshare.com/wiki/DonkeyCar_for_JetRacer_ROS_Tutorial_I:_Install_Jetson_Nano
-We have decided to decrease the maximum speed by changing the PWM_STEERING_THROTTLE config file of "mycar" folder values to the following: \
+To set up the JetRacer, we followed the provided guide https://www.waveshare.com/wiki/DonkeyCar_for_JetRacer_ROS_Tutorial_I:_Install_Jetson_Nano \
+We installed the neccesary ROS and python software. \
+It was decided to decrease the maximum speed by changing the PWM_STEERING_THROTTLE config file of "mycar" folder values to the following: \
 "THROTTLE_FORWARD_PWM": 397,            #pwm value for max forward throttle\
 "THROTTLE_STOPPED_PWM": 307,            #pwm value for no movement\
 "THROTTLE_REVERSE_PWM": 157,            #pwm value for max reverse throttle\
@@ -54,10 +55,14 @@ The virtual track is created using the virtual_env_creator.py script. This outpu
 It creates a 2D map with 0 and 1 values, with 0 representing empty space and 1 representing an obstacle. The accuracy of the map is 5mm in real world per pixel in the virtual track.
 The car's position is then mapped to this virtual by rounding.
 
+### IMU tracking
+$$$$$$$$$$$$$$$$$$$$$$LIAM HOW DID YOU AND CEM HACK IT
+
 ### Updating virtual location
-We gather the position and heading from the odometer and then compute the car's x, y, and heading, using math formulas that can be found in the code base, to keep these values updated. Then, we map them to the virtual track to use in the actual use-case of the safety layer.
+We gather the position and heading from the odometer and then compute the car's x, y, and heading, using math formulas that can be found in the code base, to keep these values updated. Then, we map them to the virtual track to use in the actual use-case of the safety layer
+
 ### Computing collision
-The objects on the virtual track and the car itself have computed collision circles, and if any of them collide, the recovery logic is called.
+The objects on the virtual track and the car itself have computed collision circles, and if any of them collide, the recovery logic is called. The circle of the car has a diameter of 11mm. The circles are purposefully a bit bigger in order to stop the car before it actually hits/crosses an obstacle.
 
 ### Recovery
 Once a collision is detected, the car proceeds with the recovery mode. This logic proceeds as follows :\
@@ -67,10 +72,12 @@ Wait for a few more seconds.\
 Continue normal operations.\
 \
 This logic should keep the car safe from hitting any obstacles or lines and allow the model to retry a different approach on how to proceed.
-## Connecting Donkey with Safety Layer
-How did we actually connect these two things? We added a class in the DonkeyCar library for our use case. When loading the model, we chose our hacked class instead. In this class, we have the safety logic implemented by wrapping the original run function and adding our functionality next to it. We import the safety.py file with the class implementing the virtual track and call on its function as necessary to ensure the model does not do anything incorrectly. 
 
-On top of this, we have a tool that sends the visualisation of the virtual track and the car's location to the defined IP address on which this client should run for debugging purposes.
+## Connecting Donkey with Safety Layer
+How did we actually connect these two things? We added a class in the DonkeyCar library for our use case. When loading the model, we chose our hacked in class instead. In this class, we have the safety logic implemented by wrapping the original run function and adding our functionality next to it. We import the safety.py file with the class implementing the virtual track and call on its function as necessary to ensure the model does not do anything incorrectly. 
+
+On top of this, we have a tool that sends the visualisation of the virtual track and the car's location to the defined IP address on which this client should run for debugging purposes. This connection is established using the class in common_state.py that is once again located in the "mycar" folder.
+
 ## Results
 As a result of all these actions, the car can drive on the track we tested on. When the model is insufficient for this task, the safety layer proceeds to save the car from these unwanted actions and recovers from them. 
 
@@ -81,6 +88,7 @@ $$$$$$$$$$$$$$$$$$INSERT VIDEO
 ## How to run
 Proceed to set the JetRacer as defined in the product documentation.
 Change up the following files:
-mycar/...
-...
+/mycar/...
+
+/projects/donkeycar/donkeycar/parts/
 ...
