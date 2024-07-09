@@ -56,7 +56,7 @@ It creates a 2D map with 0 and 1 values, with 0 representing empty space and 1 r
 The car's position is then mapped to this virtual by rounding.
 
 ### IMU tracking
-$$$$$$$$$$$$$$$$$$$$$$LIAM HOW DID YOU AND CEM HACK IT
+To track the relative location and direction of the car we have added another subscriber to ROS and thus we listen to the data that is being passed and process it to navigate the virtual enviroment.
 
 ### Updating virtual location
 We gather the position and heading from the odometer and then compute the car's x, y, and heading, using math formulas that can be found in the code base, to keep these values updated. Then, we map them to the virtual track to use in the actual use-case of the safety layer
@@ -77,14 +77,29 @@ This logic should keep the car safe from hitting any obstacles or lines and allo
 How did we actually connect these two things? We added a class in the DonkeyCar library for our use case. When loading the model, we chose our hacked in class instead. In this class, we have the safety logic implemented by wrapping the original run function and adding our functionality next to it. We import the safety.py file with the class implementing the virtual track and call on its function as necessary to ensure the model does not do anything incorrectly. 
 
 On top of this, we have a tool that sends the visualisation of the virtual track and the car's location to the defined IP address on which this client should run for debugging purposes. This connection is established using the class in common_state.py that is once again located in the "mycar" folder.
-$$$$$$$$$$$$$$$$$$insert image of the visualization
+![image](https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/03dfdf4b-a0ba-4c3a-a24b-a5d5f8cb75b4)
+One needs to set up the address in keras.py to which this visualization sends the data under KerasSafetyRNN self.addr. On this other device, one needs to run the file visualization.py to receive and show the virtual environment.
+
 
 ## Results
 As a result of all these actions, the car can drive on the track we tested on. When the model is insufficient for this task, the safety layer proceeds to save the car from these unwanted actions and recovers from them. 
 
-$$$$$$$$$$$$$$$$$$INSERT VIDEO
+### Nonsafety
+https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/3c48a4b0-8336-4fcd-96fa-1a72646c16a5
+
+https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/6c3fe969-e55c-4ade-968e-1ecd083692b7
+
+### Safety
+https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/96b70bd5-5b7b-4bba-860e-f2ba8c9dcf0f
+
+https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/539d3e18-4df0-4f0b-9521-150dab6f4633
+
+
 
 ## Conclusion
+The safety layer has proven to be a viable option for avoiding obstacles. It successfully prevents the car from hitting any obstacles or lines. It recovers the car successfully back, and then the model proceeds to take back over and successfully navigates problematic corners and obstacles.
+
+One limitation that we encountered was the hardware platform running out of RAM and CPU since the freeware that we were using was single-threaded and not multi-threaded. Thus, without extra steps taken on startup, the car drives slowly and jumpy as it tries to keep up with the slow single core. This also leads to inaccuracies with the IMU and, thus, our safety layer. We have observed that if we let the program run for a few seconds to finish up all the initial tasks until the end, we get rid of this problem, but it takes a couple of minutes. Further detail in how to run section.
 
 ## How to run
 Proceed to set the JetRacer as defined in the product documentation.
