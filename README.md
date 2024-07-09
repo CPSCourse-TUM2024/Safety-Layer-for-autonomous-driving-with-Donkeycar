@@ -13,7 +13,7 @@ Paper used: https://doi.org/10.1109/LRA.2022.3192205
 Our project uses the following platform to develop and run our implementation.\
 https://www.waveshare.com/product/jetracer-ros-ai-kit.htm \
 It is a JetRacer ROS kit from waveshare.\
-Components: Raspberry Pi RP2040 Chip, 37-520 Metal Encoder Motor, 11 wire AB phase hall speed sensor, supports wheel odometry, IMU sensor MPU9250, Lidar RPLIDAR A1\
+Components: Raspberry Pi RP2040 Chip, 37-520 Metal Encoder Motor, 11 wire AB phase hall speed sensor, supports wheel odometry, IMU sensor MPU9250, Lidar RPLIDAR A1
 
 ## Track
 ![IMG_1552](https://github.com/ValachPatrik/Safety-Layer-for-autonomous-driving-with-Donkeycar/assets/82080194/bec8a2b9-ad7f-4e95-89c8-e7ea17b8fb6f)
