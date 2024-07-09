@@ -102,9 +102,22 @@ The safety layer has proven to be a viable option for avoiding obstacles. It suc
 One limitation that we encountered was the hardware platform running out of RAM and CPU since the freeware that we were using was single-threaded and not multi-threaded. Thus, without extra steps taken on startup, the car drives slowly and jumpy as it tries to keep up with the slow single core. This also leads to inaccuracies with the IMU and, thus, our safety layer. We have observed that if we let the program run for a few seconds to finish up all the initial tasks until the end, we get rid of this problem, but it takes a couple of minutes. Further detail in how to run section.
 
 ## How to run
-Proceed to set the JetRacer as defined in the product documentation.
-Change up the following files:
-/mycar/...
+To run the car with the safety enabled, pull the commit with safety enabled or if you want it without safety pull this commit.
 
-/projects/donkeycar/donkeycar/parts/
-...
+After car starts running, open 2 terminals with ssh to the Jetson Nano Waveshare Car.
+
+on one of them run the following:
+
+cd mycar
+source ~/env/bin/activate
+roslaunch jetracer jetracer.launch
+after waiting some time for the ROS libraries to run (as they are not very optimized it takes some time before it runs stable)
+
+then on the other ssh session run:
+
+cd mycar
+source ~/env/bin/activate
+python manage.py drive --model ~/mycar/models/mypilot.h5
+After those two ssh sessions are running, you can go to ipAddressOfCar:8887 and from that screen, change the driving mdoe from User to Full Auto and wait until the Reinforcement Learning Model starts running.
+
+It will then start running the code.
