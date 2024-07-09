@@ -827,7 +827,6 @@ class KerasSafetyRNN(KerasPilot):
             )
         ), self.addr)
         next_model_move = wrapped_run(self, img_arr)
-        return next_model_move
         if recovery_action is None:
             return next_model_move
         else:
